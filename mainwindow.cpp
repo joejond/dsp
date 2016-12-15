@@ -1,4 +1,4 @@
-#define MODULASI 1
+#define MODULASI 0
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <qwt_plot.h>
 #include <qwt_plot_curve.h>
+#include <qwt_plot_grid.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,6 +20,30 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->isi_amp->setSingleStep(0.1);
     ui->isi_amp_2->setSingleStep(0.1);
 
+#if MODULASI
+    ui->l_freq->setText("Fm");
+    ui->l_freq_2->setText("Fc");
+    ui->l_amp->setText("Am");
+    ui->l_amp_2->setText("Ac");
+#else
+    ui->l_index_m->setVisible(false);
+    ui->isi_im->setVisible(false);
+#endif
+
+    initGrafik();
+
+
+
+
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+
+void MainWindow::initGrafik(){
     plot1 = new QwtPlot();
     plot2 = new QwtPlot();
     plot3 = new QwtPlot();
@@ -27,9 +52,9 @@ MainWindow::MainWindow(QWidget *parent) :
     kurva3 = new QwtPlotCurve();
     kurva4 = new QwtPlotCurve();
 
-    ui->verticalLayout_3->addWidget(plot1);
-    ui->verticalLayout_3->addWidget(plot2);
-    ui->verticalLayout_3->addWidget(plot3);
+    ui->verticalLayout_2->addWidget(plot1);
+    ui->verticalLayout_2->addWidget(plot2);
+    ui->verticalLayout_2->addWidget(plot3);
 
     kurva1->setPen(Qt::red);
     kurva1->attach(plot1);
@@ -41,31 +66,39 @@ MainWindow::MainWindow(QWidget *parent) :
     kurva4->attach(plot3);
 
 
-//    plot1->setAutoFillBackground(true);
+    plot1->setMaximumHeight(200);
     plot1->setPalette(Qt::white);
     plot1->setAxisTitle(QwtPlot::yLeft,"Amplitude");
     plot1->setAxisTitle(QwtPlot::xBottom,"Time");
-
+    plot2->setMaximumHeight(200);
     plot2->setPalette(Qt::white);
     plot2->setAxisTitle(QwtPlot::yLeft,"Amplitude");
     plot2->setAxisTitle(QwtPlot::xBottom,"Time");
-
+    plot3->setMaximumHeight(200);
     plot3->setPalette(Qt::white);
     plot3->setAxisTitle(QwtPlot::yLeft,"Amplitude");
     plot3->setAxisTitle(QwtPlot::xBottom,"Frekuensi");
 
+    QwtPlotGrid *grid1 = new QwtPlotGrid();
+    grid1->setPen(QPen(Qt::gray,0.0,Qt::DotLine));
+    grid1->enableX(true);
+    grid1->enableY(true);
+    grid1->attach(plot1);
+
+    QwtPlotGrid *grid2 = new QwtPlotGrid();
+    grid2->setPen(QPen(Qt::gray,0.0,Qt::DotLine));
+    grid2->enableX(true);
+    grid2->enableY(true);
+    grid2->attach(plot2);
+
+    QwtPlotGrid *grid3 = new QwtPlotGrid();
+    grid3->setPen(QPen(Qt::gray,0.0,Qt::DotLine));
+    grid3->enableX(true);
+    grid3->enableY(true);
+
+    grid3->attach(plot3);
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-void MainWindow::cek_sin(){
-
-
-
-}
 void MainWindow::buffer(){
     xval[0] = new double[(int) point];
     yval[0] = new double[(int) point];
@@ -99,39 +132,37 @@ void MainWindow::on_t_start_clicked()
 
 #if MODULASI
     qDebug() << "Mulai Modulasi";
+    double index = a/a2;
+
+    QString im;
+    im.sprintf("%.2f",index);
+
+    ui->isi_im->setText(im);
+
     /* signal yang dimodulasi   misal 20 Hz*/
      this->sig->gen_wave(f,a,yval[0],xval[0],point,0);
 
     /*dmodulasi dengan signal carrier 200Hz*/
-//    for (int i=0; i<point+1;i++){
-//        Amod[i] = a + yval[0][i];
-//    }
-
     this->sig->gen_wave_mod(f2,a2,yval[0],yval[1],xval[1],point);
-
-
-
-
+    kurva1->setRawSamples(xval[0],yval[0],point+1);
+    kurva3->setRawSamples(xval[1],yval[1],point+1);
 #else
     this->sig->gen_wave(f,a,yval[0],xval[0],point,0);
     this->sig->gen_wave(f2,a2,yval[1],xval[1],point,0);
-#endif
-    double pecahan = (double) (1.0)/(point);
     /*sinus gabungan all*/
-#if 0
+    double pecahan = (double) (1.0)/(point);
     for(j=0;j<point+1;j++){
-
         xval_all[j] = j * pecahan;
-
         yval_all[j] = yval[0][j] + yval[1][j];
-        qDebug("xval[%d] = %f",j,yval_all[j]);
+//        qDebug("xval[%d] = %f",j,yval_all[j]);
     }
-#endif
-    kurva1->setRawSamples(xval[0],yval[0],point+1);
-//    kurva2->setRawSamples(xval[1],yval[1],point+1);
-//    kurva3->setRawSamples(xval_all,yval_all,point+1);
 
-    kurva3->setRawSamples(xval[1],yval[1],point+1);
+    kurva1->setRawSamples(xval[0],yval[0],point+1);
+    kurva2->setRawSamples(xval[1],yval[1],point+1);
+    kurva3->setRawSamples(xval_all,yval_all,point+1);
+
+
+#endif
 
     plot1->replot();
     plot2->replot();

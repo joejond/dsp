@@ -66,6 +66,7 @@ private:
     dsp *sig;
     void buffer();
     void buat_windowfilter(int tipe);
+    void initGrafik();
 //    void clearbuffer();
 
 };
