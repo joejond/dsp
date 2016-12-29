@@ -84,11 +84,11 @@ void MainWindow::initGrafik(){
     plot1->setMaximumHeight(200);                       //tinggi plot1 (default:200)
     plot1->setPalette(Qt::white);                       //background plot1
     plot1->setAxisTitle(QwtPlot::yLeft,"Amplitude");    //keterangan nama plot1 vertikal
-    plot1->setAxisTitle(QwtPlot::xBottom,"Time1");      //keterangan nama plot1 horizontal
+    plot1->setAxisTitle(QwtPlot::xBottom,"Time");      //keterangan nama plot1 horizontal
     plot2->setMaximumHeight(200);                       //tinggi plot2 (default:200)
     plot2->setPalette(Qt::white);                       //background plot2
     plot2->setAxisTitle(QwtPlot::yLeft,"Amplitude");    //keterangan nama plot2 vertikal
-    plot2->setAxisTitle(QwtPlot::xBottom,"Time2");      //keterangan nama plot2 horizontal
+    plot2->setAxisTitle(QwtPlot::xBottom,"Time");      //keterangan nama plot2 horizontal
     plot3->setMaximumHeight(200);                       //tinggi plot3 (default:200)
     plot3->setPalette(Qt::white);                       //background plot3
     plot3->setAxisTitle(QwtPlot::yLeft,"Amplitude");    //keterangan nama plot3 vertikal
