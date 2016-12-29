@@ -21,7 +21,7 @@ void time_tt::run() {
 }
 
 QString time_tt::bacaWaktu() {
-    return this->data_waktu;
+    return this->data_waktu; //just comment
 }
 
 void time_tt::simpanWaktu(QString timee) {
