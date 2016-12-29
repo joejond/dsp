@@ -6,19 +6,30 @@
 #include "util/fourier.h"
 
 #include <QDebug>
+#include <QTime>
+#include <QTimer>
+#include <QThread>
+#include <QString>
+#include <QObject>
 #include <qwt_plot.h>
 #include <qwt_plot_curve.h>
 #include <qwt_plot_grid.h>
+#include "time_t.h"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Analisis Digital");
+    this->setWindowTitle("Analisis Digital"); //nama window
 
-    ui->isi_amp->setSingleStep(0.1);
-    ui->isi_amp_2->setSingleStep(0.1);
+    disp_time = new time_tt;
+    QTimer *udTime = new QTimer(this);
+    QObject::connect(udTime, SIGNAL(timeout()), this, SLOT(simpanTime()));
+    udTime->start(1000);
+    ui->isi_amp->setSingleStep(0.1);        //mengganti kenaikan pada A1
+    ui->isi_amp_2->setSingleStep(0.1);      //mengganti kenaikan pada A2
 
 #if MODULASI
     ui->l_freq->setText("Fm");
@@ -41,57 +52,61 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+void MainWindow::simpanTime() {
+    qDebug() << disp_time->bacaWaktu();
+    ui->statusBar->showMessage(disp_time->data_waktu);
 
+}
 
 void MainWindow::initGrafik(){
-    plot1 = new QwtPlot();
-    plot2 = new QwtPlot();
-    plot3 = new QwtPlot();
-    kurva1 = new QwtPlotCurve();
-    kurva2 = new QwtPlotCurve();
-    kurva3 = new QwtPlotCurve();
-    kurva4 = new QwtPlotCurve();
+    plot1 = new QwtPlot();      //plot1 (atas)
+    plot2 = new QwtPlot();      //plot2 (tengah)
+    plot3 = new QwtPlot();      //plot3 (bawah)
+    kurva1 = new QwtPlotCurve(); //wave1
+    kurva2 = new QwtPlotCurve(); //wave2
+    kurva3 = new QwtPlotCurve(); //wave kawasan waktu -> WaveT
+    kurva4 = new QwtPlotCurve(); //wave kawasan frekuensi -> WaveF
 
     ui->verticalLayout_2->addWidget(plot1);
     ui->verticalLayout_2->addWidget(plot2);
     ui->verticalLayout_2->addWidget(plot3);
 
-    kurva1->setPen(Qt::red);
-    kurva1->attach(plot1);
-    kurva2->setPen(Qt::blue);
-    kurva2->attach(plot1);
-    kurva3->setPen(Qt::blue);
-    kurva3->attach(plot2);
-    kurva4->setPen(Qt::blue);
-    kurva4->attach(plot3);
+    kurva1->setPen(Qt::red);    //warna wave1
+    kurva1->attach(plot1);      //wave1 digambar di plot1
+    kurva2->setPen(Qt::blue);   //warna wave2
+    kurva2->attach(plot1);      //wave2 digambar di plot1
+    kurva3->setPen(Qt::green);  //warna WaveT
+    kurva3->attach(plot2);      //waveT digambar di plot2
+    kurva4->setPen(Qt::yellow); //warna WaveF
+    kurva4->attach(plot3);      //waveF digambar di plot3
 
 
-    plot1->setMaximumHeight(200);
-    plot1->setPalette(Qt::white);
-    plot1->setAxisTitle(QwtPlot::yLeft,"Amplitude");
-    plot1->setAxisTitle(QwtPlot::xBottom,"Time");
-    plot2->setMaximumHeight(200);
-    plot2->setPalette(Qt::white);
-    plot2->setAxisTitle(QwtPlot::yLeft,"Amplitude");
-    plot2->setAxisTitle(QwtPlot::xBottom,"Time");
-    plot3->setMaximumHeight(200);
-    plot3->setPalette(Qt::white);
-    plot3->setAxisTitle(QwtPlot::yLeft,"Amplitude");
-    plot3->setAxisTitle(QwtPlot::xBottom,"Frekuensi");
+    plot1->setMaximumHeight(200);                       //tinggi plot1 (default:200)
+    plot1->setPalette(Qt::white);                       //background plot1
+    plot1->setAxisTitle(QwtPlot::yLeft,"Amplitude");    //keterangan nama plot1 vertikal
+    plot1->setAxisTitle(QwtPlot::xBottom,"Time1");      //keterangan nama plot1 horizontal
+    plot2->setMaximumHeight(200);                       //tinggi plot2 (default:200)
+    plot2->setPalette(Qt::white);                       //background plot2
+    plot2->setAxisTitle(QwtPlot::yLeft,"Amplitude");    //keterangan nama plot2 vertikal
+    plot2->setAxisTitle(QwtPlot::xBottom,"Time2");      //keterangan nama plot2 horizontal
+    plot3->setMaximumHeight(200);                       //tinggi plot3 (default:200)
+    plot3->setPalette(Qt::white);                       //background plot3
+    plot3->setAxisTitle(QwtPlot::yLeft,"Amplitude");    //keterangan nama plot3 vertikal
+    plot3->setAxisTitle(QwtPlot::xBottom,"Frekuensi");  //keterangan nama plot3 horizontal
 
-    QwtPlotGrid *grid1 = new QwtPlotGrid();
-    grid1->setPen(QPen(Qt::gray,0.0,Qt::DotLine));
-    grid1->enableX(true);
-    grid1->enableY(true);
-    grid1->attach(plot1);
+    QwtPlotGrid *grid1 = new QwtPlotGrid();             //grid pada plot1 name : grid1
+    grid1->setPen(QPen(Qt::gray,0.0,Qt::DotLine));      //detail grid plot1 : warna gray, besarnya 0.0, tipe DotLine
+    grid1->enableX(true);                               //grid X ditampilkan
+    grid1->enableY(true);                               //grid y ditampilkan
+    grid1->attach(plot1);                               //grid1 digambar di plot1
 
-    QwtPlotGrid *grid2 = new QwtPlotGrid();
+    QwtPlotGrid *grid2 = new QwtPlotGrid();             //grid pada plot2 name : grid2
     grid2->setPen(QPen(Qt::gray,0.0,Qt::DotLine));
     grid2->enableX(true);
     grid2->enableY(true);
     grid2->attach(plot2);
 
-    QwtPlotGrid *grid3 = new QwtPlotGrid();
+    QwtPlotGrid *grid3 = new QwtPlotGrid();             //grid pada plot3 name : grid3
     grid3->setPen(QPen(Qt::gray,0.0,Qt::DotLine));
     grid3->enableX(true);
     grid3->enableY(true);
@@ -140,7 +155,7 @@ void MainWindow::on_t_start_clicked()
     ui->isi_im->setText(im);
 
     /* signal yang dimodulasi   misal 20 Hz*/
-     this->sig->gen_wave(f,a,yval[0],xval[0],point,0);
+    this->sig->gen_wave(f,a,yval[0],xval[0],point,0);
 
     /*dmodulasi dengan signal carrier 200Hz*/
     this->sig->gen_wave_mod(f2,a2,yval[0],yval[1],xval[1],point);

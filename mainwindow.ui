@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
+    <width>563</width>
     <height>323</height>
    </rect>
   </property>
@@ -233,47 +233,14 @@
      </layout>
     </item>
    </layout>
-   <zorder>frame</zorder>
-   <zorder>verticalLayoutWidget</zorder>
-   <zorder>l_freq</zorder>
-   <zorder>isi_frek</zorder>
-   <zorder>l_freq_3</zorder>
-   <zorder>l_freq_2</zorder>
-   <zorder>isi_frek_2</zorder>
-   <zorder>l_freq_4</zorder>
-   <zorder>l_amp</zorder>
-   <zorder>isi_amp</zorder>
-   <zorder>l_freq_5</zorder>
-   <zorder>l_amp_2</zorder>
-   <zorder>isi_amp_2</zorder>
-   <zorder>l_freq_6</zorder>
-   <zorder>l_s_rate</zorder>
-   <zorder>combo_sample</zorder>
-   <zorder>l_freq_7</zorder>
-   <zorder>l_freq_5</zorder>
-   <zorder>l_s_rate</zorder>
-   <zorder>combo_sample</zorder>
-   <zorder>l_freq_7</zorder>
-   <zorder>l_freq</zorder>
-   <zorder>isi_frek</zorder>
-   <zorder>l_freq_3</zorder>
-   <zorder>l_freq_2</zorder>
-   <zorder>isi_frek_2</zorder>
-   <zorder>l_freq_4</zorder>
-   <zorder>l_amp</zorder>
-   <zorder>isi_amp</zorder>
-   <zorder>l_freq_5</zorder>
-   <zorder>l_amp_2</zorder>
-   <zorder>isi_amp_2</zorder>
-   <zorder>l_freq_6</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>482</width>
-     <height>15</height>
+     <width>563</width>
+     <height>25</height>
     </rect>
    </property>
   </widget>
