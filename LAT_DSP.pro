@@ -34,9 +34,11 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
-#INCLUDEPATH += /home/jono/KANTOR/koding/daunbiru/haliza/qt_lib/qwt-6.1.3/src
-#LIBS += -L/home/jono/KANTOR/koding/daunbiru/haliza/qt_lib/lib_qwt-6.1.3/lib -lqwt -lm
+FOLDER = /home/jono/KANTOR/haliza/aplikasi
+INCLUDEPATH += $$FOLDER/qt_lib/qwt-6.1.3/src
+LIBS += -L$$FOLDER/qt_lib/lib_qwt-6.1.3/lib -lqwt -lm
 
-INCLUDEPATH += /home/server/Downloads/qwt-6.1.3/src
-LIBS += -L/home/server/Downloads/build-qwt-Desktop_Qt_5_3_GCC_64bit-Debug/lib -lqwt -lm
+#INCLUDEPATH += /home/server/Downloads/qwt-6.1.3/src
+#LIBS += -L/home/server/Downloads/build-qwt-Desktop_Qt_5_3_GCC_64bit-Debug/lib -lqwt -lm
         #/home/server/Downloads/build-qwt-Desktop_Qt_5_3_GCC_64bit-Debug/lib
+

@@ -7,15 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>563</width>
-    <height>323</height>
+    <height>365</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
      <widget class="QFrame" name="frame">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -35,181 +35,174 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="1" column="0">
-          <widget class="QLabel" name="l_freq">
-           <property name="text">
-            <string>F1</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QComboBox" name="combo_sample">
-           <item>
-            <property name="text">
-             <string>256</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>512</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>1024</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>2048</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>4096</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QDoubleSpinBox" name="isi_amp">
-           <property name="minimum">
-            <double>0.000000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>5.000000000000000</double>
-           </property>
-           <property name="value">
-            <double>1.000000000000000</double>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="l_s_rate">
-           <property name="text">
-            <string>Sampling</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QLabel" name="l_freq_7">
-           <property name="text">
-            <string>Sps</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QSpinBox" name="isi_frek">
-           <property name="maximum">
-            <number>1000000</number>
-           </property>
-           <property name="singleStep">
-            <number>2</number>
-           </property>
-           <property name="value">
-            <number>10</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QLabel" name="l_freq_3">
-           <property name="text">
-            <string>Hz</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="l_freq_2">
-           <property name="text">
-            <string>F2</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="l_amp">
-           <property name="text">
-            <string>A1</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QSpinBox" name="isi_frek_2">
-           <property name="maximum">
-            <number>1000000</number>
-           </property>
-           <property name="singleStep">
-            <number>2</number>
-           </property>
-           <property name="value">
-            <number>10</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2">
-          <widget class="QLabel" name="l_freq_4">
-           <property name="text">
-            <string>Hz</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QLabel" name="l_freq_5">
-           <property name="text">
-            <string>Volt</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="l_amp_2">
-           <property name="text">
-            <string>A2</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QDoubleSpinBox" name="isi_amp_2">
-           <property name="value">
-            <double>1.000000000000000</double>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="2">
-          <widget class="QLabel" name="l_freq_6">
-           <property name="text">
-            <string>Volt</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="l_index_m">
-           <property name="text">
-            <string>Index M</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QLabel" name="isi_im">
-           <property name="text">
-            <string>.</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QPushButton" name="t_start">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="l_s_rate">
          <property name="text">
-          <string>Plot</string>
+          <string>Sampling</string>
          </property>
         </widget>
        </item>
-       <item>
+       <item row="0" column="1" colspan="3">
+        <widget class="QComboBox" name="combo_sample">
+         <item>
+          <property name="text">
+           <string>256</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>512</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>1024</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2048</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4096</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QLabel" name="l_freq_7">
+         <property name="text">
+          <string>Sps</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="l_freq">
+         <property name="text">
+          <string>F1</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="3">
+        <widget class="QSpinBox" name="isi_frek">
+         <property name="maximum">
+          <number>1000000</number>
+         </property>
+         <property name="singleStep">
+          <number>2</number>
+         </property>
+         <property name="value">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QLabel" name="l_freq_3">
+         <property name="text">
+          <string>Hz</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="l_amp">
+         <property name="text">
+          <string>A1</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="3">
+        <widget class="QDoubleSpinBox" name="isi_amp">
+         <property name="minimum">
+          <double>0.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>5.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>1.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QLabel" name="l_freq_5">
+         <property name="text">
+          <string>Volt</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="l_freq_2">
+         <property name="text">
+          <string>F2</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="3">
+        <widget class="QSpinBox" name="isi_frek_2">
+         <property name="maximum">
+          <number>1000000</number>
+         </property>
+         <property name="singleStep">
+          <number>2</number>
+         </property>
+         <property name="value">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4">
+        <widget class="QLabel" name="l_freq_4">
+         <property name="text">
+          <string>Hz</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="l_amp_2">
+         <property name="text">
+          <string>A2</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" colspan="3">
+        <widget class="QDoubleSpinBox" name="isi_amp_2">
+         <property name="value">
+          <double>1.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="4">
+        <widget class="QLabel" name="l_freq_6">
+         <property name="text">
+          <string>Volt</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="l_index_m">
+         <property name="text">
+          <string>Index M</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLabel" name="isi_im">
+         <property name="text">
+          <string>.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="2">
+        <widget class="QLabel" name="l_window_tipe">
+         <property name="text">
+          <string>Window Tipe</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="2">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -222,10 +215,51 @@
          </property>
         </spacer>
        </item>
+       <item row="6" column="2" colspan="3">
+        <widget class="QComboBox" name="combo_window_tipe">
+         <item>
+          <property name="text">
+           <string>Hanning</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Hamming</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BlackMan</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Rectang</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="7" column="0" colspan="4">
+        <widget class="QCheckBox" name="show_window_filter">
+         <property name="text">
+          <string>Show Window Filter</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0" colspan="5">
+        <widget class="QPushButton" name="t_start">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Plot</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>
-    <item>
+    <item row="0" column="1">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="sizeConstraint">
        <enum>QLayout::SetFixedSize</enum>
@@ -240,7 +274,7 @@
      <x>0</x>
      <y>0</y>
      <width>563</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
